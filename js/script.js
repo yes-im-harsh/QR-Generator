@@ -16,6 +16,11 @@ const onGenerateSubmit = (e) => {
     setTimeout(() => {
       hideSpinner();
       generateQRCode(url, size);
+
+      setTimeout(() => {
+        const saveUrl = qr.querySelector("img").src;
+        createSaveButton(saveUrl);
+      }, 50);
     }, 1000);
   }
 };
@@ -25,11 +30,23 @@ const generateQRCode = (url, size) => {
     text: url,
     width: size,
     height: size,
+    colorDark: "#5C5E70",
   });
 };
 
 const clearUI = () => {
   qr.innerHTML = "";
+};
+
+const createSaveButton = (saveUrl) => {
+  const link = document.createElement("a");
+  link.id = "save-link";
+  link.classList =
+    "bg-red-500 rounded py-2 m-auto w-1/3 my-5 text-white font-bold hover:bg-red-700";
+  link.href = saveUrl;
+  link.download = "qrcode";
+  link.innerHTML = "Save Image";
+  document.getElementById("generated").appendChild(link);
 };
 
 const showSpinner = () => {
