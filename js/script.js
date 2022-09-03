@@ -19,6 +19,7 @@ const onGenerateSubmit = (e) => {
 
       setTimeout(() => {
         const saveUrl = qr.querySelector("img").src;
+        console.log(saveUrl);
         createSaveButton(saveUrl);
       }, 50);
     }, 1000);
@@ -30,12 +31,16 @@ const generateQRCode = (url, size) => {
     text: url,
     width: size,
     height: size,
-    colorDark: "#5C5E70",
+    colorDark: "#1B294B",
   });
 };
 
 const clearUI = () => {
   qr.innerHTML = "";
+  const saveBtn = document.getElementById("save-link");
+  if (saveBtn) {
+    saveBtn.remove();
+  }
 };
 
 const createSaveButton = (saveUrl) => {
